@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 毛概第三组</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C41E3A',      // 主色调：中国红
+                        secondary: '#1A4B8C',    // 辅助色：深蓝
+                        accent: '#DAA520',       // 强调色：金色
+                        light: '#FFF5F5',        // 浅色背景
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .section-divider {
+                @apply h-1 w-20 bg-primary my-8 mx-auto;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light text-gray-800 min-h-screen flex flex-col">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="ncu_symbol.jpg" alt="校徽" class="h-10 w-auto rounded">
+                <span class="text-lg font-semibold">毛概第三组</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="index.html" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-home mr-1"></i> 主页
+                </a>
+                <a href="video1.html" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-book mr-1"></i> 理论学习
+                </a>
+                <a href="game/challenge2.html" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-gamepad mr-1"></i> 知识闯关
+                </a>
+                <a href="about_us.html" class="text-primary font-medium text-base">
+                    <i class="fa fa-info-circle mr-1"></i> 关于我们
+                </a>
+            </nav>
+            
+            <button class="md:hidden text-gray-600 hover:text-primary text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 标题横幅 -->
+    <div class="bg-primary text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-[url('https://picsum.photos/id/1058/1200/400')] bg-cover bg-center"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-[clamp(1.5rem,4vw,2.5rem)] font-bold mb-4 text-shadow">团队成员介绍</h1>
+            <p class="text-lg max-w-2xl mx-auto opacity-90">传承红色基因，凝聚团队力量，共筑学习平台</p>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="max-w-5xl mx-auto">
+            <!-- 团队介绍 -->
+            <section class="mb-16 text-center">
+                <p class="text-gray-700 leading-relaxed max-w-3xl mx-auto">
+                    我们是南昌大学计算机系毛概第三学习小组，致力于通过数字化平台传播毛泽东思想经典理论，
+                    结合专业特色探索红色文化学习新方式，让理论学习更生动、更贴近当代大学生。
+                </p>
+                <div class="section-divider"></div>
+            </section>
+
+            <!-- 队长信息（尺寸稍大于成员框） -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-10">
+                    <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full">队长</span>
+                </h2>
+                
+                <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover max-w-3xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-start gap-6">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-user-circle-o text-primary text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">幸泽昕</h3>
+                            <div class="flex items-center text-sm text-gray-500 mb-4">
+                                <i class="fa fa-flag text-primary mr-2"></i>
+                                <span>团队负责人 | 统筹协调</span>
+                            </div>
+                            <div class="text-gray-700 leading-relaxed">
+                                <p class="mb-3"><span class="font-medium text-primary">主要贡献：</span></p>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span>负责团队整体规划与任务分配，协调各成员工作进度</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span>主导网站整体框架设计与红色主题风格定位</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span>审核学习内容的准确性，确保理论传播的严谨性</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span>组织团队讨论，结合计算机专业特色设计学习模块</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 团队成员（10位） -->
+            <section>
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-10">
+                    <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full">团队成员</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 成员1 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">张三</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>负责视频内容剪辑与后期处理，制作符合红色主题的视觉特效，确保学习视频的观赏性与教育性。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成员2 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">李四</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>参与网站前端开发，实现页面交互效果与响应式设计，优化用户学习体验。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成员3 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">王五</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>整理毛泽东文集相关文献资料，撰写学习概述内容，确保理论知识的准确性与专业性。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成员4 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">赵六</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>设计闯关游戏的题目与规则，将理论知识融入互动环节，增强学习的趣味性与记忆点。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成员5 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">孙七</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>负责学习平台的文案撰写，将理论内容通俗化表达，提升内容可读性。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成员6 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">周八</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>收集整理历史背景资料，为学习内容提供详实的历史语境支持。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成员7 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">吴九</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>测试网站功能与兼容性，收集用户反馈并提出优化建议。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成员8 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">郑十</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>设计红色主题相关图标与装饰元素，提升平台视觉统一性。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成员9 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">钱十一</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>协助整理计算机专业与理论学习的结合点，撰写专业感悟内容。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成员10 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-hover md:col-span-2 lg:col-span-1 mx-auto md:mx-0">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fa fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">冯十二</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <span class="font-medium text-primary">主要贡献：</span>负责平台内容的校对与修订，确保文字表述准确无误，提升内容质量。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 返回主页面按钮 -->
+            <div class="text-center mt-16">
+                <a href="index.html" class="inline-block transition-all duration-300 hover:shadow-lg bg-primary text-white px-8 py-3 rounded-lg font-medium flex items-center text-base">
+                    <i class="fa fa-home mr-2"></i> 返回主页面
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-gray-400 text-sm">
+                <p class="mb-4">© 2025 毛概第三组学习平台 | 南昌大学计算机系</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="hover:text-primary transition-colors"><i class="fa fa-book mr-1"></i> 文献资料</a>
+                    <a href="about_us.html" class="hover:text-primary transition-colors"><i class="fa fa-users mr-1"></i> 关于我们</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
