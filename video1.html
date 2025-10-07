@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>章节 1 - 社会主义改造理论</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#B22222',      // 深红色主色调
+                        secondary: '#CD5C5C',    // 浅红色辅助色
+                        accent: '#DAA520',       // 金色强调色
+                        dark: '#1C1C1C',         // 深色文字
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .red-gradient {
+                background: linear-gradient(135deg, #B22222 0%, #8B0000 100%);
+            }
+            .card-shadow {
+                box-shadow: 0 4px 15px rgba(178, 34, 34, 0.15);
+            }
+            .btn-effect {
+                @apply transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-dark min-h-screen flex flex-col">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- 左上角图标和文字 -->
+            <div class="flex items-center space-x-3">
+                <img src="ncu_symbol.jpg" alt="图标" class="h-10 w-auto rounded border-2 border-primary">
+                <span class="text-lg font-bold text-primary">毛概第三组</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="index.html" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-home mr-1"></i> 主页
+                </a>
+                <a href="overview1.html" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-file-text-o mr-1"></i> 章节概述
+                </a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-question-circle mr-1"></i> 帮助
+                </a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-primary hover:text-primary/80 text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 标题区 -->
+    <div class="red-gradient text-white py-6 md:py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold">社会主义改造理论</h1>
+                    <p class="text-sm md:text-base opacity-90 mt-1">中国特色社会主义理论体系学习</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center text-sm">
+                    <span class="bg-white/20 px-3 py-1 rounded-full flex items-center">
+                        <i class="fa fa-play-circle mr-1"></i> 章节 1 视频
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- 章节导航 -->
+        <div class="bg-white rounded-lg p-4 card-shadow mb-8">
+            <h2 class="text-base font-semibold text-gray-700 mb-3 flex items-center">
+                <i class="fa fa-list-ul text-primary mr-2"></i> 章节导航
+            </h2>
+            <div class="flex flex-wrap gap-2">
+                <a href="video1.html" class="px-4 py-2 bg-primary text-white rounded-md text-sm font-medium flex items-center">
+                    <i class="fa fa-check-circle mr-1"></i> 章节 1
+                </a>
+                <a href="video2.html" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md text-sm font-medium transition-colors">
+                    章节 2
+                </a>
+                <a href="video3.html" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md text-sm font-medium transition-colors">
+                    章节 3
+                </a>
+            </div>
+        </div>
+
+        <!-- 视频区域 -->
+        <div class="max-w-4xl mx-auto bg-white rounded-xl overflow-hidden card-shadow mb-8">
+            <div class="p-4 border-b border-gray-100 bg-gray-50">
+                <h2 class="text-lg md:text-xl font-bold text-gray-800">从新民主主义到社会主义的转变</h2>
+                <p class="text-sm text-gray-500 mt-1">探索历史必然性与理论依据</p>
+            </div>
+            
+            <div class="p-4 md:p-6">
+                <!-- 视频容器 - 自适应视频尺寸 -->
+                <div class="w-full bg-gray-900 rounded-lg overflow-hidden">
+                    <video controls class="w-full h-auto">
+                        <source src="你的视频1地址.mp4" type="video/mp4">
+                        你的浏览器不支持视频播放，请更新浏览器
+                    </video>
+                </div>
+                
+                <!-- 视频信息 -->
+                <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                            <i class="fa fa-clock-o text-primary"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">视频时长</p>
+                            <p class="font-medium">00:00:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                            <i class="fa fa-eye text-primary"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">观看次数</p>
+                            <p class="font-medium">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                            <i class="fa fa-calendar text-primary"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">更新日期</p>
+                            <p class="font-medium">2023-XX-XX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="max-w-4xl mx-auto flex flex-wrap gap-4 justify-center">
+            <a href="overview1.html" class="btn-effect bg-primary text-white px-6 py-3 rounded-lg font-medium flex items-center text-base">
+                <i class="fa fa-file-text-o mr-2"></i> 查看章节概述
+            </a>
+            <a href="video2.html" class="btn-effect bg-white border border-primary text-primary px-6 py-3 rounded-lg font-medium flex items-center text-base">
+                下一章节 <i class="fa fa-arrow-right ml-2"></i>
+            </a>
+            <a href="index.html" class="btn-effect bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium flex items-center text-base">
+                <i class="fa fa-home mr-2"></i> 返回主页
+            </a>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <p class="text-sm text-gray-400">© 2025 毛概第三组学习平台</p>
+                    <p class="text-xs text-gray-500 mt-1">学习红色理论，传承革命精神</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">
+                        <i class="fa fa-book mr-1"></i> 学习资料
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">
+                        <i class="fa fa-info-circle mr-1"></i> 关于我们
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">
+                        <i class="fa fa-envelope mr-1"></i> 联系我们
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

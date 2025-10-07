@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>章节概述 - 社会主义改造理论</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C41E3A',      // 主色调：中国红
+                        secondary: '#1A4B8C',    // 辅助色：深蓝
+                        accent: '#F9A826',       // 强调色：金色
+                        light: '#FFF5F5',        // 浅色背景
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            }
+            .section-divider {
+                @apply h-1 w-20 bg-primary my-8 mx-auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light text-gray-800 min-h-screen flex flex-col">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- 左上角图标和文字 -->
+            <div class="flex items-center space-x-3">
+                <img src="ncu_symbol.jpg" alt="图标" class="h-10 w-auto rounded">
+                <span class="text-lg font-semibold">毛概第三组</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="video1.html" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-video-camera mr-1"></i> 章节视频
+                </a>
+                <a href="index.html" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-home mr-1"></i> 返回主页
+                </a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-gray-600 hover:text-primary text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 标题横幅 -->
+    <div class="bg-primary text-white py-12 md:py-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-[url('https://picsum.photos/id/1071/1200/400')] bg-cover bg-center"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-shadow">社会主义改造理论</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90">探索中国从新民主主义到社会主义的伟大历史转变</p>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <!-- 概述卡片 -->
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8 mb-10 card-hover">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                        <i class="fa fa-history text-primary text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">章节概述</h2>
+                </div>
+                <p class="text-gray-700 leading-relaxed">
+                    本章系统阐述了社会主义改造的历史必然性、实践路径及其伟大历史意义，
+                    展现了中国共产党领导人民探索适合中国国情的社会主义道路的创造性实践，
+                    揭示了生产关系变革与生产力发展相适应的客观规律。
+                </p>
+            </div>
+
+            <!-- 第一部分 -->
+            <section class="mb-16">
+                <div class="flex items-center mb-6">
+                    <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-3 text-base font-bold">一</span>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800">从新民主主义到社会主义的转变：历史必然性与理论依据</h3>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 pl-14 md:pl-16 card-hover">
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        该部分核心阐述了过渡时期的历史定位与转变逻辑。新中国成立后，我国进入新民主主义社会，这是一个过渡性社会形态，存在国营经济、合作社经济等五种经济成分，阶级矛盾仍是社会主要矛盾。
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        毛泽东提出的过渡时期总路线（"一化三改"）是转变的核心指引，即逐步实现社会主义工业化（主体），并逐步实现对农业、手工业和资本主义工商业的社会主义改造（两翼）。
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        这一路线既顺应了工业化建设对生产资料公有制的需求，也符合生产力发展与社会制度演进的客观规律，为向社会主义过渡提供了明确方向。
+                    </p>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- 第二部分 -->
+            <section class="mb-16">
+                <div class="flex items-center mb-6">
+                    <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-3 text-base font-bold">二</span>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800">社会主义改造道路：特色路径与宝贵历史经验</h3>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 pl-14 md:pl-16 card-hover">
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        此小节聚焦三大改造的具体实践与经验总结。在改造路径上，针对不同对象采取差异化策略：
+                    </p>
+                    
+                    <ul class="list-disc pl-6 mb-4 space-y-2 text-gray-700">
+                        <li>对农业，遵循 "自愿互利、典型示范、国家帮助" 原则，从互助组到初级农业生产合作社再到高级社，逐步推进集体化；</li>
+                        <li>对手工业，通过生产合作小组、手工业供销合作社向手工业生产合作社转变；</li>
+                        <li>对资本主义工商业，创新采用和平赎买方式，从加工订货、统购包销到公私合营，实现私有制向公有制的平稳过渡。</li>
+                    </ul>
+                    
+                    <p class="text-gray-700 leading-relaxed">
+                        历史经验方面，核心是坚持社会主义工业化与改造同步推进，遵循自愿互利、逐步过渡的原则，同时注重把对企业的改造与对人的改造相结合，确保了改造过程的稳定与顺利。
+                    </p>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- 第三部分 -->
+            <section class="mb-16">
+                <div class="flex items-center mb-6">
+                    <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-3 text-base font-bold">三</span>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800">社会主义基本制度在中国的确立：里程碑意义与历史影响</h3>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 pl-14 md:pl-16 card-hover">
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        1956 年底三大改造基本完成，标志着社会主义基本制度在我国正式确立。这一制度确立的意义重大：
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-light p-4 rounded-lg border-l-4 border-primary">
+                            <h4 class="font-semibold mb-2 text-primary">经济意义</h4>
+                            <p class="text-sm text-gray-700">生产资料公有制成为主体，奠定了社会主义经济基础</p>
+                        </div>
+                        <div class="bg-light p-4 rounded-lg border-l-4 border-primary">
+                            <h4 class="font-semibold mb-2 text-primary">政治意义</h4>
+                            <p class="text-sm text-gray-700">人民民主专政的国家制度与各项政治制度进一步巩固，实现了人民当家作主</p>
+                        </div>
+                        <div class="bg-light p-4 rounded-lg border-l-4 border-primary">
+                            <h4 class="font-semibold mb-2 text-primary">历史意义</h4>
+                            <p class="text-sm text-gray-700">是中国历史上最深刻最伟大的社会变革，为当代中国发展进步奠定了根本前提和制度基础</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed">
+                        社会主义制度的确立，也为后续社会主义建设道路的探索开辟了道路，是中国共产党把马克思主义基本原理同中国具体实际相结合的伟大成果。
+                    </p>
+                </div>
+            </section>
+
+            <!-- 相关链接按钮 -->
+            <div class="flex flex-wrap gap-4 justify-center mt-10">
+                <a href="video1.html" class="transition-all duration-300 hover:shadow-lg bg-primary text-white px-6 py-3 rounded-lg font-medium flex items-center text-base">
+                    <i class="fa fa-play-circle mr-2"></i> 观看章节视频
+                </a>
+                <a href="index.html" class="transition-all duration-300 hover:shadow-lg bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium flex items-center text-base">
+                    <i class="fa fa-home mr-2"></i> 返回主页
+                </a>
+                <a href="video2.html" class="transition-all duration-300 hover:shadow-lg bg-secondary text-white px-6 py-3 rounded-lg font-medium flex items-center text-base">
+                    下一章节 <i class="fa fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-gray-400 text-sm">
+                <p class="mb-4">© 2025 毛概第三组学习平台 | 社会主义理论学习</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="hover:text-primary transition-colors"><i class="fa fa-book mr-1"></i> 学习资料</a>
+                    <a href="#" class="hover:text-primary transition-colors"><i class="fa fa-users mr-1"></i> 关于我们</a>
+                    <a href="#" class="hover:text-primary transition-colors"><i class="fa fa-question-circle mr-1"></i> 帮助中心</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

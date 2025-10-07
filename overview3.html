@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>章节概述 - 学习《论十大关系》</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C41E3A',      // 主色调：中国红（与前两章保持一致）
+                        secondary: '#1A4B8C',    // 辅助色：深蓝
+                        accent: '#DAA520',       // 强调色：金色
+                        light: '#FFF5F5',        // 浅色背景
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'system-ui', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'serif'], // 正文引用使用衬线字体
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            }
+            .section-divider {
+                @apply h-1 w-20 bg-primary my-8 mx-auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .quote-border {
+                @apply border-l-4 border-primary pl-4 italic text-gray-700;
+            }
+            .relation-card {
+                @apply bg-white rounded-lg p-3 shadow-sm border-t-2 border-primary hover:border-primary/80 transition-colors;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light text-gray-800 min-h-screen flex flex-col">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- 左上角图标和文字 -->
+            <div class="flex items-center space-x-3">
+                <img src="ncu_symbol.jpg" alt="图标" class="h-10 w-auto rounded">
+                <span class="text-lg font-semibold">毛概第三组</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="video3.html" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-video-camera mr-1"></i> 章节视频
+                </a>
+                <a href="index.html" class="text-gray-600 hover:text-primary transition-colors text-base">
+                    <i class="fa fa-home mr-1"></i> 返回主页
+                </a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-gray-600 hover:text-primary text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 标题横幅 -->
+    <div class="bg-primary text-white py-12 md:py-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-[url('https://picsum.photos/id/1059/1200/400')] bg-cover bg-center"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-[clamp(1.5rem,4vw,2.5rem)] font-bold mb-4 text-shadow">学习《论十大关系》</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90">从“统筹协调”思维中汲取智慧，探索科技报国新路径</p>
+            <div class="mt-6 inline-block bg-white/20 px-4 py-2 rounded-lg text-sm">
+                <i class="fa fa-book mr-2"></i> 毛泽东文集 · 社会主义建设探索经典
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <!-- 文献信息卡片 -->
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8 mb-10 card-hover border-t-4 border-primary">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <i class="fa fa-file-text text-primary text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">文献基本信息</h2>
+                        <p class="text-gray-500 text-sm mt-1">把握文章背景与历史定位</p>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="flex items-start">
+                        <span class="text-primary font-medium w-24">文章标题：</span>
+                        <span class="text-gray-700">《论十大关系》</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-primary font-medium w-24">收录文集：</span>
+                        <span class="text-gray-700">《毛泽东文集》第七卷</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-primary font-medium w-24">创作时期：</span>
+                        <span class="text-gray-700">1956年</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-primary font-medium w-24">核心价值：</span>
+                        <span class="text-gray-700">探索中国特色社会主义建设道路的开篇之作</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第一部分 -->
+            <section class="mb-16">
+                <div class="flex items-center mb-6">
+                    <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-3 text-base font-bold">一</span>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800">《论十大关系》核心内容概述</h3>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 pl-14 md:pl-16 card-hover">
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        《论十大关系》是毛泽东在探索中国社会主义建设道路初期的重要著作，聚焦 “如何借鉴苏联经验、走中国自己的建设道路” 这一核心问题。文章系统梳理了社会主义建设中的十大关键关系，旨在打破苏联模式束缚，探索符合中国国情的建设路径。
+                    </p>
+                    
+                    <div class="quote-border my-6 font-serif">
+                        文章提出 “把国内外一切积极因素调动起来，为社会主义事业服务” 的总方针，核心是通过 “平衡发展” 与 “统筹协调”，解决社会主义建设中的矛盾与问题，为后续社会主义建设提供了重要方法论指导。
+                    </div>
+
+                    <!-- 十大关系分类展示 -->
+                    <div class="mt-8 mb-6">
+                        <h4 class="font-semibold text-primary mb-4 flex items-center">
+                            <i class="fa fa-th-list mr-2"></i> 十大关系分类梳理
+                        </h4>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <!-- 经济领域关系 -->
+                            <div>
+                                <h5 class="text-sm font-medium text-gray-800 mb-3 flex items-center">
+                                    <i class="fa fa-line-chart text-primary mr-2"></i> 经济领域关系
+                                </h5>
+                                <div class="space-y-2">
+                                    <div class="relation-card">重工业和轻工业、农业的关系</div>
+                                    <div class="relation-card">国家、生产单位和生产者个人的关系</div>
+                                    <div class="relation-card">中央和地方的关系</div>
+                                    <div class="relation-card">沿海工业和内地工业的关系</div>
+                                    <div class="relation-card">经济建设和国防建设的关系</div>
+                                </div>
+                            </div>
+                            <!-- 政治与社会领域关系 -->
+                            <div>
+                                <h5 class="text-sm font-medium text-gray-800 mb-3 flex items-center">
+                                    <i class="fa fa-users text-primary mr-2"></i> 政治与社会领域关系
+                                </h5>
+                                <div class="space-y-2">
+                                    <div class="relation-card">汉族和少数民族的关系</div>
+                                    <div class="relation-card">党和非党的关系</div>
+                                    <div class="relation-card">革命和反革命的关系</div>
+                                    <div class="relation-card">是非关系</div>
+                                    <div class="relation-card">中国和外国的关系</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-700 leading-relaxed">
+                        文章对经济领域关系的梳理，重点强调 “平衡发展”，反对片面重视重工业而忽视民生领域；对政治与社会领域关系的分析，关键倡导 “统筹协调”，旨在调动一切积极因素。这种 “全面兼顾、重点突破” 的思维，既是对马克思主义唯物辩证法的运用，也是对中国国情的深刻把握。
+                    </p>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- 第二部分 -->
+            <section class="mb-16">
+                <div class="flex items-center mb-6">
+                    <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-3 text-base font-bold">二</span>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800">新时期计算机系大学生的阅读感悟</h3>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm p-6 pl-14 md:pl-16 card-hover">
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        作为计算机系大学生，阅读《论十大关系》让我们在专业学习与价值认知上获得双重启发，文章中的 “统筹协调” 思维与 “调动积极因素” 理念，对当代科技人才成长具有重要指导意义。
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="p-4 bg-light rounded-lg border border-primary/10">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                                    <i class="fa fa-code-fork text-primary"></i>
+                                </div>
+                                <h4 class="font-semibold text-gray-800">专业学习：平衡“深度”与“广度”</h4>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">
+                                “十大关系” 中 “重工业与轻农工业平衡” 的逻辑，对计算机专业学习极具启示。当前领域细分方向众多（AI、网络安全、软件开发等），若只专注单一方向而忽视学科交叉（如 AI 与伦理、安全与开发的协同），易陷入 “片面发展” 误区。我们需构建 “技术深度+学科广度” 的知识体系，既精通核心领域，又了解相关交叉学科，成为复合型技术人才。
+                            </p>
+                        </div>
+                        
+                        <div class="p-4 bg-light rounded-lg border border-primary/10">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                                    <i class="fa fa-handshake-o text-primary"></i>
+                                </div>
+                                <h4 class="font-semibold text-gray-800">社会责任：调动“积极因素”报国</h4>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">
+                                文章 “调动一切积极因素” 的理念，指引我们践行科技报国使命。在数字经济时代，我们可借鉴 “团结一切可团结力量” 的思路，联合不同专业同学攻克技术难题——如用 AI 助力传统产业升级、用大数据服务乡村治理、用网络安全保障国家数字安全，将技术能力转化为推动国家发展的 “积极因素”，彰显青年担当。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed font-medium">
+                        新时代的计算机系大学生，更应传承《论十大关系》中 “实事求是、统筹兼顾” 的精神，既要在技术领域深耕细作，又要胸怀 “国之大者”，将个人专业发展与国家战略需求紧密结合，在推动科技自立自强、建设数字中国的征程中，实现个人价值与社会价值的统一。
+                    </p>
+                </div>
+            </section>
+
+            <!-- 相关链接按钮 -->
+            <div class="flex flex-wrap gap-4 justify-center mt-10">
+                <a href="video3.html" class="transition-all duration-300 hover:shadow-lg bg-primary text-white px-6 py-3 rounded-lg font-medium flex items-center text-base">
+                    <i class="fa fa-play-circle mr-2"></i> 观看章节视频
+                </a>
+                <a href="index.html" class="transition-all duration-300 hover:shadow-lg bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium flex items-center text-base">
+                    <i class="fa fa-home mr-2"></i> 返回主页
+                </a>
+                <a href="video2.html" class="transition-all duration-300 hover:shadow-lg bg-secondary text-white px-6 py-3 rounded-lg font-medium flex items-center text-base">
+                    <i class="fa fa-arrow-left mr-2"></i> 上一章节
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-gray-400 text-sm">
+                <p class="mb-4">© 2025 毛概第三组学习平台 | 毛泽东经典文献学习</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="hover:text-primary transition-colors"><i class="fa fa-book mr-1"></i> 文献资料</a>
+                    <a href="#" class="hover:text-primary transition-colors"><i class="fa fa-users mr-1"></i> 关于我们</a>
+                    <a href="#" class="hover:text-primary transition-colors"><i class="fa fa-question-circle mr-1"></i> 帮助中心</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
