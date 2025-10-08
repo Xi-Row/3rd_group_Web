@@ -456,7 +456,7 @@ function showBadge(text, isScoreToast = false) {
         backdrop.classList.remove('active');
       }, 300);
     }
-  }, 100);
+  }, 2400);
 }
 // 修改gradeQuiz函数中的得分弹窗调用
 function gradeQuiz() {
@@ -508,7 +508,7 @@ setTimeout(() => {
   // 否则进入下一关
   state.levelIndex++;
   render();
-}, 100);
+}, 2400);
 }
 
 
