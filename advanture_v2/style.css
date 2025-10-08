@@ -1,0 +1,616 @@
+:root {
+  --red-600: #b91c1c;
+  --red-700: #991b1b;
+  --red-50: #fff5f5;
+  --bg: #fff9f9;
+  --muted: #6b7280;
+  --radius: 14px;
+  --maxwidth: 1700px;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", "PingFang SC", "Microsoft Yahei", sans-serif;
+}
+
+/* 基础重置 */
+* {
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: #1e1e1e;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* 容器整体 */
+.app {
+  width: 100%;
+  max-width: var(--maxwidth);
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* 固定定位容器，使用flex横向排列子元素 */
+.fixed-header {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
+  display: flex; /* 启用flex布局 */
+  align-items: center; /* 垂直居中对齐 */
+  gap: 12px; /* 图片和称号之间的间距 */
+}
+
+/* logo图片样式 */
+.logo-img {
+  width: 80px; /* 根据需要调整大小 */
+  height: auto;
+}
+
+/* 称号文本样式 */
+.fixed-header div {
+  font-size: 36px;
+  font-weight: 800;
+  color: #000000; /* 文本颜色，可根据需要调整 */
+  white-space: nowrap; /* 防止称号过长换行 */
+}
+  
+/* 顶栏 */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, var(--red-700), var(--red-600));
+  color: #fff;
+  padding: 18px 28px;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* logo 与小组名的间距 */
+  margin-right: 10px; /* 与标题的间距 */
+}
+
+.logo-img {
+  width: 80px; /* 调整 logo 大小，可根据需求修改 */
+  height: auto;
+}
+
+.group-name {
+  color:#000000;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.brand {
+  flex: 1; /* 让标题区域占据剩余空间，实现居中或自适应 */
+  text-align: center; /* 可选：让标题文字居中 */
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: 0.5px;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 14px;
+}
+.score, .progress{
+  font-weight: 700;
+  font-size: 30px;
+  color:#4cafa7;
+  letter-spacing: 0.5px;
+}
+.btn {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 8px 14px;
+  background: #fff;
+  color: var(--red-700);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn.showEnding {
+  font-size: 30px;
+  padding: 36px 120px;
+  display: block;        /* 确保是块级元素（若默认不是） */
+  margin: 0 auto;        /* 水平居中，垂直margin为0 */
+  /* 可选：width: 适配宽度（如 width: 200px;），否则块级元素会占满父容器宽度 */
+}
+.btn.showEnding.hidden {
+    display: none;
+}
+.btn.small {
+  font-size: 20px;
+  padding: 12px 16px;
+}
+.btn.small.hidden{
+    display: none;
+}
+
+.btn.primary {
+  background: var(--red-600);
+  color: #fff;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 主体布局 */
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 24px;
+  background: var(--red-50);
+}
+.left-panel {
+  flex: 1 1 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.right-panel {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.scene-theme {
+  font-size: 1.3rem;
+  color: var(--red-700);
+  font-weight: bold;
+  border-left: 40px solid var(--red-600);
+  padding-left: 12px;
+  margin-bottom: 12px;
+}
+
+.scene-describe {
+  font-weight: 600;
+  margin-top: 16px;
+  font-size: 36px;
+  color: var(--red-700);
+}
+.scene-describe.hidden{
+  display: none;
+}
+
+/* 保持原有基础样式，增加内边距为标注预留空间 */
+.scene-desc {
+  font-size: 30px;
+  background: #fafafa;
+  border-radius: var(--radius);
+  padding: 16px 16px 16px 16px; /* 保持原有内边距 */
+  padding-right: 140px; /* 右侧预留足够空间给"时代处境"标注 */
+  box-shadow: inset 0 0 0 1px #f5dada;
+  position: relative;
+  min-height: 80px; /* 确保小屏幕下有足够高度容纳标注 */
+}
+
+/* 调整"时代处境"标注的位置和大小 */
+.scene-title {
+  position: absolute;
+  top: 16px; /* 与容器顶部保持一致内边距 */
+  right: 16px; /* 与容器右侧保持一致内边距 */
+  background: var(--red-600);
+  color: white;
+  font-size: 38px; /* 适当缩小字体 */
+  padding: 6px 12px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  line-height: 1.2; /* 优化行高避免文字重叠 */
+  white-space: nowrap; /* 确保文字不换行 */
+}
+
+/* 响应式调整：小屏幕优化 */
+@media (max-width: 768px) {
+  .scene-desc {
+    padding-right: 16px; /* 小屏幕取消右侧预留空间 */
+    padding-top: 60px; /* 顶部预留空间给标注 */
+  }
+  
+  .scene-title {
+    top: 16px; /* 固定在容器顶部 */
+    right: 16px;
+    font-size: 24px; /* 进一步缩小字体适应小屏幕 */
+  }
+}
+    
+/* 选项列表 */
+.choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.choice {
+  font-size: 30px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  background: #dab3b3;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  cursor: pointer;
+}
+.choice:hover {
+  background: var(--red-700);
+  transform: translateY(-2px);
+}
+
+/* 问答卡片 */
+.quiz-card,
+.inter-card {
+  position: relative;
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f2dcdc;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeInQuiz 0.35s ease;
+}
+
+/* 平滑悬浮反馈 */
+.quiz-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
+/* 标题样式 */
+.quiz-card h3 {
+  color: var(--red-700);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+/* 结果文本区块 */
+.quiz-outcome {
+  background: #fff8f8;
+  border-left: 4px solid var(--red-600);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  animation: fadeInQuiz 0.4s ease;
+}
+
+/* 问题区域 */
+#quizForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#quizForm label {
+  display: block;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  box-shadow: inset 0 0 0 1px #f3cccc;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+#quizForm label:hover {
+  background: #fff3f3;
+  transform: translateX(2px);
+}
+
+/* 按钮组 */
+.quiz-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.quiz-actions button {
+  flex: 1;
+  font-weight: 600;
+  padding: 10px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+/* 返回按钮 */
+#quizBack {
+  background: #fff7f7;
+  color: var(--red-700);
+  border: 1px solid #f1caca;
+  
+}
+
+#quizBack:hover {
+  background: #ffe8e8;
+}
+
+/* 提交按钮 */
+#quizSubmit {
+  background: var(--red-600);
+  color: white;
+}
+
+#quizSubmit:hover {
+  background: var(--red-700);
+  transform: translateY(-2px);
+}
+
+/* 动画 */
+@keyframes fadeInQuiz {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 隐藏控制 */
+.hidden {
+  display: none;
+}
+
+/* 右侧信息面板 */
+.panel-block {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--red-600);
+}
+.panel-block.title {
+  padding: 20px;
+}
+.panel-block h4 {
+  margin-top: 0;
+  color: var(--red-700);
+}
+
+/* 称号列表 */
+.titles-list li {
+  font-size: 15px;
+  color: #374151;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(185, 28, 28, 0.1);
+  background: linear-gradient(135deg, #fef2f2 0%, #fff 100%);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  /* position: relative; */
+  overflow: hidden;
+}
+
+/* 称号列表项装饰 */
+.titles-list li::before {
+  content: '🏆';
+  margin-right: 2px;
+}
+
+.titles-list li:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.1);
+  border-color: var(--red-600);
+}
+.quiz-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* 针对按钮单独设置样式，包括颜色 */
+.quiz-actions button {
+  font-size: 24px; /* 按钮字体大小 */
+  padding: 6px 12px; /* 按钮内边距 */
+  
+  /* 字体颜色（文字颜色） */
+  color: #ffffff; /* 白色文字，可替换为其他颜色如 #333333（黑色） */
+  
+  /* 按钮背景颜色 */
+  background-color: #4cafa7; /* 绿色背景，可替换为 #2196F3（蓝色）等 */
+  
+  /* 可选：添加边框和圆角，让按钮更美观 */
+  border: none; /* 去除默认边框 */
+  border-radius: 4px; /* 轻微圆角 */
+  
+  /* 可选：鼠标悬停效果 */
+  cursor: pointer; /* 鼠标变为手型 */
+}
+
+/* 按钮 hover 状态（鼠标悬停时的样式） */
+.quiz-actions button:hover {
+  background-color: #45a049; /* 背景色加深，与上面的绿色匹配 */
+  /* 可选：修改 hover 时的字体颜色 */
+  /* color: #f0f0f0; */
+}
+
+.quiz-outcome {
+  color: #666;
+  font-size: 40px;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: rgba(0,0,0,0.02);
+  border-radius: 8px;
+}
+/* 页脚 */
+.footer {
+  background: #fafafa;
+  color: var(--muted);
+  font-size: 28px;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.credits {
+  font-size: 38px;
+
+}
+/* 弹窗 */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  font-size: 30px;
+}
+.modal.hidden {
+  display: none;
+}
+.modal-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  width: 90%;
+  max-width: 560px;
+  animation: popUp 0.3s ease;
+}
+@keyframes popUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.modal-actions {
+  margin-top: 18px;
+  text-align: right;
+  display: flex;
+  gap: 10px;
+}
+
+/* 提示框 */
+.toast {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -0%); /* 初始状态：向上偏移自身高度，完全隐藏在视口外 */
+  top: 20px; /* 最终显示时距离顶部的距离 */
+  background: #8cdbb4;
+  color: #fff;
+  padding: 70px 90px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  font-size: 40px;
+  z-index: 1000;
+  transition: transform 0.3s ease-out; /* 增加过渡动画，让出现更平滑 */
+}
+.toast.hidden {
+  display: none;
+}
+
+/* 新增：得分弹窗专属样式（居中显示） */
+.toast.score-toast {
+  top: 50%; /* 垂直居中 */
+  bottom: auto; /* 覆盖原有底部定位 */
+  transform: translate(-50%, -50%); /* 水平+垂直居中 */
+  background: #fff;
+  color: #333;
+  padding: 120px 240px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  min-width: 300px;
+  text-align: center;
+}
+/* 得分弹窗内部标题样式 */
+.toast.score-toast .toast-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #4CAF50;
+}
+/* 得分弹窗内部详情样式（支持<br>换行和<strong>加粗） */
+.toast.score-toast .toast-detail {
+  font-size: 30px;
+  line-height: 1.6;
+}
+.toast.score-toast .toast-detail strong {
+  color: #4CAF50;
+  font-size: 1.1em;
+}
+
+/* 新增：背景遮罩样式（仅得分弹窗显示） */
+.toast-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none; /* 初始不可点击，避免遮挡操作 */
+  transition: opacity 0.3s ease;
+  z-index: 999; /* 遮罩层级低于弹窗 */
+}
+/* 激活遮罩（得分弹窗显示时） */
+.toast-backdrop.active {
+  opacity: 1;
+  pointer-events: auto; /* 激活点击，防止弹窗外操作 */
+}
+/* 动画加载圈 */
+.inter-spinner {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  border: 4px solid rgba(185,28,28,0.15);
+  border-top-color: var(--red-600);
+  animation: spin 1s linear infinite;
+  margin: 12px auto;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 响应式 */
+@media (max-width: 980px) {
+  .main {
+    flex-direction: column;
+  }
+  .right-panel {
+    width: 100%;
+  }
+}
+
+#showEnding.highlight {
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  color: white;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,87,34,0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(255,87,34,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,87,34,0); }
+}

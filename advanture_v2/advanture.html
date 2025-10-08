@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>《论十大关系》闯关</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="app">
+      <!-- <div class="fixed-top-left">
+    <img src="d:\school_study\Web\maogai\3rd_group_Web\ncu_symbol.jpg" alt="logo" class="logo-img">
+    <div class="title-label">毛概第三组</div>
+   </div> -->
+    <header class="topbar">
+      <!-- 新增 logo 和小组名称容器，与 brand 并列 -->
+      <div class="topbar-left">
+        <img src="../ncu_symbol.jpg" alt="logo" class="logo-img">
+        <div class="group-name">毛概第三组</div>
+      </div>
+      <div class="brand">
+        <div class="logo">《论十大关系》· 互动学习</div>
+      </div>
+      <div class="status">
+        <a href="../index.html" class="btn small">回到主页</a>
+        <button id="resetBtn" class="btn small">重置存档</button>
+      </div>
+    </header>
+    <main class="main">
+      <section class="left-panel">
+        <div class="scene-card" id="sceneCard" aria-live="polite">
+          <div class="scene-header">
+            <div id="levelTheme" class="scene-theme">重工业和轻工业、农业的关系</div>
+            <!-- <div class="scene-theme" id="levelTheme"></div> -->
+          </div>
+          <div class="scene-body">
+             <div class="scene-desc">
+              <p id="sceneStory"></p>
+              <div class="scene-title">时代<br>处境</div>
+            </div>
+            <br>
+            <div id="decision" class="scene-describe hidden">决策：</div><br>
+          <button id="showEnding" class="btn showEnding hidden" disabled>结局展示</button>
+            <div id="choiceList" class="choice-list"></div>
+          </div>
+        </div>
+
+        <div id="quizCard" class="quiz-card hidden">
+          <h3>决策结果：</h3>
+        <div id="quizOutcome" class="quiz-outcome"></div>
+        <br>
+        <h3>问答环节</h3>
+        <!-- 新增：用于显示选择结果的容器 -->
+        <form id="quizForm"></form>
+        <div class="quiz-actions">
+          <button id="quizBack">返回剧情</button>
+          <button type="submit" id="quizSubmit">提交答案</button>
+        </div>
+      </div>
+        <div class="inter-card hidden" id="interCard">
+          <div id="interText" class="inter-text"></div>
+          <div class="inter-spinner" id="interSpinner"></div>
+        </div>
+      </section>
+
+      <aside class="right-panel">
+        <div class="panel-block">
+          <h4>本关要点</h4>
+          <div id="pointText"></div>
+        </div>
+
+        <div class="panel-block title">
+          <h4>已获得称号</h4>
+          <ul id="titlesList" class="titles-list"></ul>
+        </div>
+        <div class="panel-block">
+          <h4>进度与积分</h4>
+           <div class="progress">关卡: <span id="curLevel">1</span> / <span id="totalLevel">10</span></div>
+        <div class="score">积分: <span id="score">0</span></div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <div>提示：每关先决策，随后进入问答。完成 10 关后根据决策与答题率获得结局。</div>
+      <div class="credits">原文：《论十大关系》</div>
+    </footer>
+
+
+<!-- 背景遮罩：用于得分弹窗的半透明背景 -->
+    <div id="toastBackdrop" class="toast-backdrop"></div>
+
+    <!-- 徽章/得分弹窗 -->
+    <div id="badgeToast" class="toast hidden"></div>
+
+
+
+    <!-- 结局弹窗 -->
+    <div id="endingModal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-content">
+        <h2 id="endingTitle"></h2>
+        <p id="endingDesc"></p>
+        <div class="modal-actions">
+          <button id="endingClose" class="btn">关闭</button>
+          <button id="endingReset" class="btn primary">重新开始</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
