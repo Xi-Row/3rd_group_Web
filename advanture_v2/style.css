@@ -181,7 +181,7 @@ body {
 }
 
 .scene-theme {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   color: var(--red-700);
   font-weight: bold;
   border-left: 40px solid var(--red-600);
