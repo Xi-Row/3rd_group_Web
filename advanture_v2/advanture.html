@@ -23,7 +23,10 @@
       </div>
       <div class="status">
         <a href="../index.html" class="btn small">回到主页</a>
+        <a href="../guide.html" class="btn small">手机版闯关</a>
+        <a href="../downloads.html" class="btn small">资料下载</a>
         <button id="resetBtn" class="btn small">重置存档</button>
+        <div class="compact-music-player">
       </div>
     </header>
     <main class="main">
@@ -83,7 +86,25 @@
 
     <footer class="footer">
       <div>提示：每关先决策，随后进入问答。完成 10 关后根据决策与答题率获得结局。</div>
-      <div class="credits">原文：《论十大关系》</div>
+        <div class="credits">原文：《论十大关系》</div>
+                <audio id="gameMusic" loop>
+              <source src="../music/music1.MP3" type="audio/mpeg">
+              您的浏览器不支持音频播放
+          </audio>
+          
+          <div class="music-btn-container">
+              <button id="musicToggleBtn" class="music-btn">
+                  <span class="music-note">🎵</span>
+                  <span class="pause-icon">⏸</span>
+                  <span class="play-icon">▶</span>
+              </button>
+              
+              <div class="volume-control-panel">
+                  <span class="volume-icon">🔊</span>
+                  <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
+              </div>
+          </div>
+      </div>
     </footer>
 
 

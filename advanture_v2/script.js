@@ -1,5 +1,5 @@
 /* script.js
-   互动小游戏：建设之路：十大关系闯关记
+   互动小游戏：建设之路：十大关系闯关
    说明：将关卡数据内置，提供本地存档（localStorage）与结局判定。
 */
 
@@ -193,6 +193,7 @@ const LEVELS = [
 const TOTAL = LEVELS.length;
 let state = {
   levelIndex: 0,
+  isAddScore: false,
   score: 0,
   correctCount: 0,     // 每关是否选择正确计数
   titles: [],          // 已获得称号数组
@@ -277,8 +278,8 @@ function render() {
     // 所有关卡完成状态
     el.decision.classList.add('hidden');
 
-    el.levelTheme.textContent = '🎉 恭喜你完成全部关卡！';
-    el.sceneStory.textContent = '你已成功通过全部十大关系闯关，现在可以查看你的结局。';
+    el.levelTheme.textContent = '🎉 恭喜完成全部关卡！';
+    el.sceneStory.textContent = '已成功通过全部十大关系闯关，现在可以查看结局。';
     el.pointText.textContent = '所有要点已解锁，恭喜达成全部学习目标！';
     el.choiceList.innerHTML = ''; // 清空选项
     
@@ -346,7 +347,12 @@ function onChoose(choice) {
   currentOutcome = choice.outcome;
   // 如果选择正确，加分、称号
    if (choice.correct) {
+    if (!state.isAddScore){
     state.score += 10;
+    state.isAddScore = true;
+    }else{
+      state.score += 0;
+    }
     state.correctCount += 1;
     const reward = LEVELS[state.levelIndex].reward;
     if (reward && !state.titles.includes(reward)) {
@@ -492,8 +498,8 @@ setTimeout(() => {
     el.interCard.classList.add('hidden');
     el.quizCard.classList.add('hidden');
     el.decision.classList.add('hidden');
-    el.levelTitle.textContent = '🎉 恭喜你完成全部关卡！';
-    el.sceneStory.textContent = '你已成功通过全部十大关系闯关，现在可以查看你的结局。';
+    el.levelTitle.textContent = '🎉 恭喜完成全部关卡！';
+    el.sceneStory.textContent = '已成功通过全部十大关系闯关，现在可以查看结局。';
     el.choiceList.innerHTML = '';
 
     // ✅ 解锁结局按钮
@@ -507,6 +513,7 @@ setTimeout(() => {
 
   // 否则进入下一关
   state.levelIndex++;
+  state.isAddScore = false;
   render();
 }, 2400);
 }
@@ -524,10 +531,10 @@ function getEnding() {
   const quizRate = Math.round((state.quizCorrectCount / TOTAL) * 100);
 
   if (chosenCorrect === TOTAL && quizRate >= 90) {
-    return { title: '完美结局', desc: '你被评为“优秀政策研究员”，获得“建设先锋”勋章。中央采纳你的十大关系方案。' };
+    return { title: '完美结局', desc: '被评为“优秀政策研究员”，获得“建设先锋”勋章。中央采纳你的十大关系方案。' };
   }
   if (wrong <= 5 && quizRate >= 60) {
-    return { title: '普通结局', desc: '你在部分关卡中决策有偏差但总体表现合格，获得“合格研究员”称号。' };
+    return { title: '普通结局', desc: '在部分关卡中决策有偏差但总体表现合格，获得“合格研究员”称号。' };
   }
   else{
   return { title: '探索结局', desc: '多次决策失误或答题率低，建议重新学习《论十大关系》核心内容并重闯。' };
@@ -560,3 +567,118 @@ function init() {
   render();
 }
 init();
+
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('gameMusic');
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumePanel = document.querySelector('.volume-control-panel');
+    const volumeIcon = document.querySelector('.volume-icon');
+    
+    // 设置初始音量
+    audio.volume = volumeSlider.value;
+    let isPanelVisible = false;
+    updateVolumeIcon();
+    
+    // 切换播放/暂停
+    musicToggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        if (audio.paused || audio.ended) {
+            audio.play()
+                .then(() => {
+                    musicToggleBtn.classList.remove('paused');
+                    musicToggleBtn.classList.add('playing');
+                })
+                .catch(error => {
+                    console.log('播放失败:', error);
+                    alert('请点击音乐按钮开始播放背景音乐');
+                });
+        } else {
+            audio.pause();
+            musicToggleBtn.classList.remove('playing');
+            musicToggleBtn.classList.add('paused');
+        }
+    });
+    
+    // 点击按钮外部关闭音量面板
+    document.addEventListener('click', function() {
+        if (isPanelVisible) {
+            volumePanel.classList.remove('active');
+            isPanelVisible = false;
+        }
+    });
+    
+    // 右键点击显示音量面板
+    musicToggleBtn.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        toggleVolumePanel();
+    });
+    
+    // 双击显示音量面板
+    musicToggleBtn.addEventListener('dblclick', function(e) {
+        e.stopPropagation();
+        toggleVolumePanel();
+    });
+    
+    // 切换音量面板显示状态
+    function toggleVolumePanel() {
+        isPanelVisible = !isPanelVisible;
+        volumePanel.classList.toggle('active', isPanelVisible);
+    }
+    
+    // 音量调节
+    volumeSlider.addEventListener('input', adjustVolume);
+    
+    function adjustVolume() {
+        audio.volume = volumeSlider.value;
+        updateVolumeIcon();
+    }
+    
+    // 更新音量图标
+    function updateVolumeIcon() {
+        volumePanel.classList.remove('muted', 'low', 'high');
+        
+        if (audio.volume === 0) {
+            volumePanel.classList.add('muted');
+            volumeIcon.textContent = '🔇';
+        } else if (audio.volume < 0.5) {
+            volumePanel.classList.add('low');
+            volumeIcon.textContent = '🔈';
+        } else {
+            volumePanel.classList.add('high');
+            volumeIcon.textContent = '🔊';
+        }
+    }
+    
+    // 点击音量图标快速静音/恢复
+    volumeIcon.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const wasMuted = audio.volume === 0;
+        const lastVolume = volumeSlider.value || 0.7;
+        
+        if (wasMuted) {
+            // 恢复音量
+            audio.volume = lastVolume;
+            volumeSlider.value = lastVolume;
+        } else {
+            // 静音
+            volumeSlider.value = 0;
+            audio.volume = 0;
+        }
+        
+        updateVolumeIcon();
+    });
+    
+    // 阻止音量面板内部点击关闭面板
+    volumePanel.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    
+    // 尝试自动播放
+    setTimeout(() => {
+        audio.play().catch(() => {
+            console.log('自动播放被阻止，等待用户交互');
+        });
+    }, 1000);
+});

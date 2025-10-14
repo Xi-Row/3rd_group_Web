@@ -122,6 +122,139 @@ body {
   color:#4cafa7;
   letter-spacing: 0.5px;
 }
+.compact-music-player {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.music-btn-container {
+    position: relative;
+}
+
+/* 主控制按钮 */
+.music-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    font-size: 20px;
+}
+
+.music-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(211, 47, 47, 0.5);
+}
+
+/* 图标样式控制 */
+.music-note, .pause-icon, .play-icon {
+    display: none;
+}
+
+/* 初始状态显示音符图标 */
+.music-btn .music-note {
+    display: block;
+}
+
+/* 播放状态显示暂停图标 */
+.music-btn.playing .music-note {
+    display: none;
+}
+
+.music-btn.playing .pause-icon {
+    display: block;
+}
+
+/* 暂停状态显示播放图标 */
+.music-btn.paused .music-note {
+    display: none;
+}
+
+.music-btn.paused .play-icon {
+    display: block;
+}
+
+/* 音量控制面板 */
+.volume-control-panel {
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    background: white;
+    border-radius: 20px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    margin-right: 15px;
+}
+
+.volume-control-panel.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* 音量图标样式 */
+.volume-icon {
+    color: #555;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 静音状态下的音量图标 */
+.volume-control-panel.muted .volume-icon {
+    content: '🔇';
+    display: inline-block;
+}
+
+/* 低音量状态下的音量图标 */
+.volume-control-panel.low .volume-icon {
+    content: '🔈';
+    display: inline-block;
+}
+
+/* 音量滑块样式 */
+#volumeSlider {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    background: #e0e0e0;
+    border-radius: 3px;
+    outline: none;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #d32f2f;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#volumeSlider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: #b71c1c;
+}
 .btn {
   border: none;
   border-radius: 10px;
@@ -145,6 +278,7 @@ body {
 .btn.small {
   font-size: 20px;
   padding: 12px 16px;
+  text-decoration: none;
 }
 .btn.small.hidden{
     display: none;
