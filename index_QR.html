@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>学习资料下载中心</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"> -->
+<style>
+:root{
+  --main:#d32f2f;
+  --gold:#ffd700;
+  --dark:#b71c1c;
+  --light:#fff9e6;
+  --radius:12px;
+  --shadow:0 8px 20px rgba(0,0,0,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Noto Sans SC',sans-serif;
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  min-height:100vh;
+  padding:40px 20px;
+  color:#333;
+}
+.container{
+  max-width:1200px;
+  margin:0 auto;
+}
+h1{
+  text-align:center;
+  font-size:68px;
+  color:#fff;
+  margin-bottom:40px;
+  letter-spacing:2px;
+}
+.columns{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+}
+/* 单栏卡片 */
+.chapter-card{
+  background:#fff;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.chapter-header{
+  background:linear-gradient(135deg,var(--main),var(--dark));
+  color:#fff;
+  padding:25px 20px;
+  text-align:center;
+}
+.chapter-title{font-size:24px;font-weight:500;margin-bottom:6px;}
+.chapter-subtitle{font-size:14px;opacity:.9;}
+/* 按钮区 */
+.btn-group{
+  padding:25px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  flex:1;
+}
+.qr-code-area {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.qr-code-title {
+    font-size: 1.5rem;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.qr-code-img {
+    width: 680px;
+    height: 680px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    object-fit: cover;
+}
+.btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px;
+  border:none;
+  border-radius:var(--radius);
+  font-size:15px;
+  cursor:pointer;
+  transition:all .3s;
+  text-decoration:none;
+  color:#fff;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(0,0,0,.15);}
+.btn-study{background:linear-gradient(135deg,#4caf50,#388e3c);}
+.btn-book{background:linear-gradient(135deg,var(--gold),#ffa000);color:#333;}
+.btn-key{background:linear-gradient(135deg,#2196f3,#1976d2);}
+/* 图标 */
+.icon{font-size:18px;}
+/* 响应式 */
+@media(max-width:768px){
+  h1{font-size:28px;}
+  .columns{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>扫码进入网站主页</h1>
+    <div class="qr-code-area">
+      <!-- 这里替换为实际的二维码图片路径 -->
+      <img src="QR_code/index_QR.png" alt="网站二维码" class="qr-code-img">
+    </div>
+
+</body>
+</html>

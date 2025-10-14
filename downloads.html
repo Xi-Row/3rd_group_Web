@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>学习资料下载中心</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"> -->
+<style>
+:root{
+  --main:#d32f2f;
+  --gold:#ffd700;
+  --dark:#b71c1c;
+  --light:#fff9e6;
+  --radius:12px;
+  --shadow:0 8px 20px rgba(0,0,0,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Noto Sans SC',sans-serif;
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  min-height:100vh;
+  padding:40px 20px;
+  color:#333;
+}
+.container{
+  max-width:1200px;
+  margin:0 auto;
+}
+h1{
+  text-align:center;
+  font-size:36px;
+  color:#fff;
+  margin-bottom:40px;
+  letter-spacing:2px;
+}
+.columns{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+}
+/* 单栏卡片 */
+.chapter-card{
+  background:#fff;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.chapter-header{
+  background:linear-gradient(135deg,var(--main),var(--dark));
+  color:#fff;
+  padding:25px 20px;
+  text-align:center;
+}
+.chapter-title{font-size:24px;font-weight:500;margin-bottom:6px;}
+.chapter-subtitle{font-size:14px;opacity:.9;}
+/* 按钮区 */
+.btn-group{
+  padding:25px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  flex:1;
+}
+.qr-code-area {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.qr-code-title {
+    font-size: 1.5rem;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.qr-code-img {
+    width: 380px;
+    height: 380px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    object-fit: cover;
+}
+.btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px;
+  border:none;
+  border-radius:var(--radius);
+  font-size:15px;
+  cursor:pointer;
+  transition:all .3s;
+  text-decoration:none;
+  color:#fff;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(0,0,0,.15);}
+.btn-study{background:linear-gradient(135deg,#4caf50,#388e3c);}
+.btn-book{background:linear-gradient(135deg,var(--gold),#ffa000);color:#333;}
+.btn-key{background:linear-gradient(135deg,#2196f3,#1976d2);}
+/* 图标 */
+.icon{font-size:18px;}
+/* 响应式 */
+@media(max-width:768px){
+  h1{font-size:28px;}
+  .columns{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📖 学习资料下载中心</h1>
+    <div class="qr-code-area">
+      <p class="qr-code-title">扫码进入下载界面</p>
+      <!-- 这里替换为实际的二维码图片路径 -->
+      <img src="QR_code/downloads_QR.png" alt="学习资料二维码" class="qr-code-img">
+    </div>
+  <div class="columns">
+    <!-- ===== 第一章 ===== -->
+    <div class="chapter-card">
+      <div class="chapter-header">
+        <div class="chapter-title">第一章</div>
+        <div class="chapter-subtitle">从新民主主义到社会主义的转变</div>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-study"  href='overview1.html'>
+          <span class="icon">📚</span>章节学习
+        </a>
+        <a class="btn btn-book">
+          <span class="icon">📘</span>章节书目(课本第三章)
+        </a>
+        <a class="btn btn-key" href="downloads/sections_overview.pdf" download=>
+          <span class="icon">🗝️</span>章节要点下载
+        </a>
+      </div>
+    </div>
+
+    <!-- ===== 第二章 ===== -->
+    <div class="chapter-card">
+      <div class="chapter-header">
+        <div class="chapter-title">第二章</div>
+        <div class="chapter-subtitle">社会主义改造道路与宝贵经验</div>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-study"  href='overview2.html'>
+          <span class="icon">📚</span>章节学习
+        </button>
+        <a class="btn btn-book" href="downloads/revolution.pdf" download>
+          <span class="icon">📘</span>章节书目下载
+        </a>
+        <a class="btn btn-key" href="downloads/revolution_overview.pdf" download>
+          <span class="icon">🗝️</span>章节要点下载
+        </a>
+      </div>
+    </div>
+
+    <!-- ===== 第三章 ===== -->
+    <div class="chapter-card">
+      <div class="chapter-header">
+        <div class="chapter-title">第三章</div>
+        <div class="chapter-subtitle">社会主义基本制度确立与历史意义</div>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-study"  href='overview3.html'>
+          <span class="icon">📚</span>章节学习
+        </button>
+        <a class="btn btn-book" href="downloads/ten_relationships.pdf" download>
+          <span class="icon">📘</span>章节书目下载
+        </a>
+        <a class="btn btn-key" href="downloads/ten_relationships_overview.pdf" download>
+          <span class="icon">🗝️</span>章节要点下载
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

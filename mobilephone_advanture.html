@@ -1,0 +1,1023 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="x-poe-datastore-behavior" content="local_only">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建设之路：十大关系闯关</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .game-header {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .game-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .game-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            height: 8px;
+            margin-top: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #ffd700;
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        .game-content {
+            padding: 40px;
+        }
+
+        .welcome-screen, .level-screen, .result-screen, .ending-screen {
+            display: none;
+        }
+
+        .welcome-screen.active, .level-screen.active, .result-screen.active, .ending-screen.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-content {
+            text-align: center;
+        }
+
+        .welcome-content h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .story-box {
+            background: #f5f5f5;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #d32f2f;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(211,47,47,0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(211,47,47,0.4);
+        }
+
+        .level-title {
+            color: #d32f2f;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .scene-description {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #ffa000;
+            line-height: 1.8;
+        }
+
+        .choice-container {
+            margin: 30px 0;
+        }
+
+        .choice-btn {
+            width: 100%;
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .choice-btn:hover {
+            border-color: #d32f2f;
+            background: #fff5f5;
+            transform: translateX(5px);
+        }
+
+        .choice-btn.selected {
+            border-color: #d32f2f;
+            background: #ffebee;
+        }
+
+        .feedback {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideDown 0.5s;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+
+        .feedback.wrong {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+
+        .quiz-container {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            border-color: #d32f2f;
+            background: #fff5f5;
+        }
+
+        .quiz-option.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .quiz-option.wrong {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            min-width: 120px;
+            margin: 10px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 5px;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.3);
+        }
+
+        .ending-content {
+            text-align: center;
+        }
+
+        .ending-title {
+            font-size: 28px;
+            color: #d32f2f;
+            margin-bottom: 20px;
+        }
+
+        .ending-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin: 20px 0;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #757575 0%, #616161 100%);
+            margin-left: 10px;
+        }
+        .logo-img {
+        width: 30px; /* 根据需要调整大小 */
+        height: auto;
+        }
+        .group-name {
+        color:#ffffff;
+        font-size: 25px;
+        font-weight: 600;
+        }
+        .knowledge-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .knowledge-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        .download-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        background-color: #e63946; /* 红色，可根据主题调整 */
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        }
+        .btn-small {
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background: #d71313;
+        color: var(--red-700);
+        font-weight: 400;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        font-size: 25px;
+        padding: 12px 16px;
+        text-decoration: none;
+        }
+        .download-btn:hover {
+        background-color: #c92a37; /*  hover 时深色 */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+        }
+
+        .btn-icon {
+        margin-right: 8px;
+        font-size: 18px;
+        }
+
+        .btn-text {
+        font-family: "Microsoft Yahei", sans-serif;
+        }
+        @media (max-width: 768px) {
+            .game-content {
+                padding: 20px;
+            }
+            
+            .game-header h1 {
+                font-size: 22px;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+            
+            .stat-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <a href="index.html" class="btn-small">回到主页</a>
+        <a href="downloads.html" class="btn-small">资料下载</a>
+        <div class="game-header">
+            <img src="ncu_symbol.jpg" alt="logo" class="logo-img">
+            <div class="group-name">毛概第三组</div>
+            <h1>🚩 建设之路：十大关系闯关</h1>
+            <p>化身政策调研员，探索新中国建设的智慧之路</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="game-content">
+            <!-- 欢迎界面 -->
+            <div class="welcome-screen active" id="welcomeScreen">
+                <div class="welcome-content">
+                    <h2>欢迎来到1956年</h2>
+                    <div class="story-box">
+                        <p>1956年，新中国正处于社会主义建设的关键探索期。中央政治局听取三十四个部门工作汇报后，梳理出关乎国家发展的"十大关系"。</p>
+                        <p style="margin-top: 15px;">你将化身为中央政策调研室的一名年轻研究员，跟随领导深入工业基地、农村合作社、民族地区等不同场景，参与"十大关系"的调研与政策完善工作。</p>
+                        <p style="margin-top: 15px;">每一关对应一个核心关系主题，你需要通过对话选择、问题判断、决策模拟，解决实际发展难题，最终助力形成科学的建设方针。</p>
+                    </div>
+                    <button class="btn" onclick="startGame()">开始探索之旅</button>
+                </div>
+            </div>
+
+            <!-- 关卡界面 -->
+            <div class="level-screen" id="levelScreen">
+                <h2 class="level-title" id="levelTitle"></h2>
+                <div class="scene-description" id="sceneDescription"></div>
+                <div class="choice-container" id="choiceContainer"></div>
+                <div class="feedback" id="feedback"></div>
+                <div class="quiz-container" id="quizContainer" style="display: none;"></div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn" id="nextButton" style="display: none;" onclick="nextLevel()">下一关</button>
+                </div>
+            </div>
+
+            <!-- 结果界面 -->
+            <div class="result-screen" id="resultScreen">
+                <h2 style="text-align: center; color: #d32f2f; margin-bottom: 20px;">关卡总结</h2>
+                <div id="resultContent"></div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn" onclick="continueGame()">继续前进</button>
+                </div>
+            </div>
+
+            <!-- 结局界面 -->
+            <div class="ending-screen" id="endingScreen">
+                <div class="ending-content">
+                    <h2 class="ending-title" id="endingTitle"></h2>
+                    <div class="ending-description" id="endingDescription"></div>
+                    <div class="stats" id="finalStats"></div>
+                    <div id="badgesEarned"></div>
+                    <div style="margin-top: 30px;">
+                        <button class="btn" onclick="restartGame()">重新开始</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 游戏数据
+        const gameData = {
+            currentLevel: 0,
+            score: 0,
+            correctChoices: 0,
+            quizCorrect: 0,
+            totalQuizzes: 0,
+            badges: []
+        };
+
+        // 关卡数据
+        const levels = [
+            {
+                id: 1,
+                title: "第一关：重工轻农的平衡难题",
+                subtitle: "重工业和轻工业、农业的关系",
+                scene: "东北重工业基地，钢厂厂长神色焦急地向你汇报：'同志，我们工人的粮食供应越来越紧张了，部分车间因为原料短缺已经停工。'与此同时，农业部门也发来急报：'农村粮食产量严重不足，农民种粮的积极性亟待提高。'",
+                choices: [
+                    {
+                        text: "A. 优先调拨粮食给钢厂保生产 - 重工业是国家命脉，必须优先保障",
+                        correct: false,
+                        feedback: "❌ 这个决策导致了严重后果！农民种粮积极性进一步下降，下季度原料更加短缺。农业是工业的基础，忽视农业将导致重工业失去支撑。正如毛泽东所说：'重工业是我国建设的重点，必须优先发展，这是毫无疑义的。但是决不可以因此忽视轻工业和农业。'",
+                        knowledge: "核心观点：苏联片面注重重工业，忽视农业和轻工业，导致市场货物不足、货币不稳定。我国必须调整投资比例，让农业、轻工业为重工业积累更多资金。"
+                    },
+                    {
+                        text: "B. 加大农业投入、保障农民口粮 - 农业是基础，粮食问题是根本",
+                        correct: true,
+                        feedback: "✅ 英明的决策！农业投入增加后，农民种粮积极性大幅提高。很快农业丰收带来了充足的原料供应，钢厂生产不仅恢复还实现了增产。这正体现了'农业是工业基础'的核心思想。",
+                        knowledge: "核心观点：更多地发展农业、轻工业，就可以使重工业有更多的原料和市场，积累更多的资金，加快发展速度。这是一个战略性的平衡关系。",
+                        badge: "农工协调者"
+                    }
+                ],
+                quiz: {
+                    question: "毛泽东在《论十大关系》中提出，处理重工业和轻工业、农业的关系时，核心原则是什么？",
+                    options: [
+                        "优先发展重工业，完全牺牲农业和轻工业",
+                        "优先发展重工业，但不能忽视农业和轻工业，需调整投资比例",
+                        "平均分配资金，三者同步发展",
+                        "先发展轻工业和农业，再考虑重工业"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "毛泽东明确指出：'重工业是我国建设的重点，必须优先发展。但是必须同时注意发展农业和轻工业。'更多地发展农业、轻工业，可以使重工业发展得更快更好。"
+                }
+            },
+            {
+                id: 2,
+                title: "第二关：沿海与内地的布局之争",
+                subtitle: "沿海工业和内地工业的关系",
+                scene: "你来到上海一家老牌纺织厂。厂长忧心忡忡地说：'我们设备虽然老化，但技术工人很集中，想扩建却担心战争风险。'此时，四川新建工厂发来电报：'我们缺乏技术人员，生产效率很低，急需支援。'",
+                choices: [
+                    {
+                        text: "A. 停止沿海扩建，把设备全搬到内地 - 备战为主，避免战争损失",
+                        correct: false,
+                        feedback: "❌ 政策出现重大偏差！沿海技术人才大量流失，而内地因为缺乏配套设施，搬去的设备根本无法开工。这种一刀切的做法既浪费了沿海的工业基础，又没能真正帮助内地发展。",
+                        knowledge: "核心观点：新工业大部分应当摆在内地，但沿海也可以建立一些新工业，要充分利用沿海的老底子。如果采取消极态度，不积极利用和发展沿海工业，那是不对的。"
+                    },
+                    {
+                        text: "B. 保留沿海工厂并扩建，同时抽调技术人员支援内地 - 充分利用沿海优势",
+                        correct: true,
+                        feedback: "✅ 战略性的布局！沿海工厂扩建后产能大幅提升，同时派出的技术人员帮助内地工厂迅速成长。这种'利用沿海支持内地'的策略实现了双赢，体现了统筹兼顾的智慧。",
+                        knowledge: "核心观点：我国全部轻工业和重工业，约70%在沿海，30%在内地。要利用沿海原有的工业基地，使它为社会主义建设服务。",
+                        badge: "布局规划师"
+                    }
+                ],
+                quiz: {
+                    question: "我国建国初期工业布局的特点是什么？应该如何调整？",
+                    options: [
+                        "全部在沿海，应该全部搬到内地",
+                        "约70%在沿海、30%在内地，应平衡布局并利用沿海支持内地",
+                        "平均分布，不需要调整",
+                        "全部在内地，不需要发展沿海"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "毛泽东指出，工业过去集中在沿海，这是历史形成的不合理状况。新工业大部分应摆在内地，使工业布局逐步平衡，但同时要充分利用和发展沿海工业。"
+                }
+            },
+            {
+                id: 3,
+                title: "第三关：大炮与机床的取舍",
+                subtitle: "经济建设和国防建设的关系",
+                scene: "中央国防会议上气氛紧张。军方代表坚持：'国际形势严峻，必须增加军费研发原子弹！'经济部门代表则焦急地说：'工厂建设资金本就不足，如果军费过高，经济发展会严重受阻。'",
+                choices: [
+                    {
+                        text: "A. 优先增加军费 - 没有强大国防，一切都是空谈",
+                        correct: false,
+                        feedback: "❌ 决策失衡！军费大幅增加后，工业发展严重滞后，反而导致国防缺乏坚实的经济支撑。原子弹研发因为缺少工业配套而进展缓慢。",
+                        knowledge: "核心观点：加强国防建设，不能不增加军政费用，但应该在经济发展的基础上增加。只有经济建设发展得更快了，国防建设才能够有更大的进步。"
+                    },
+                    {
+                        text: "B. 降低军政费用比例、加大经济投入 - 经济是国防的基础",
+                        correct: true,
+                        feedback: "✅ 战略性选择！军政费用从占预算30%降到20%后，释放的资金大力投入工厂建设。工业迅速发展后，不仅提供了充足的军工原料，还为国防现代化奠定了坚实基础。",
+                        knowledge: "核心观点：我国去年把军政费用从1950年占预算38%降到1955年的32%，今年继续降低。只有经济建设发展得更快了，国防建设才能够有更大的进步。",
+                        badge: "战略平衡家"
+                    }
+                ],
+                quiz: {
+                    question: "毛泽东提出，增强国防力量的可靠办法是什么？",
+                    options: [
+                        "不断增加军费投入",
+                        "降低军政费用比例，增加经济建设费用",
+                        "保持军费不变",
+                        "完全取消军费"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "毛泽东明确指出：'我们一定要加强国防，为此一定要首先加强经济建设。'降低军政费用在国家预算中的比例，增加经济建设费用，经济发展了，国防才能更进步。"
+                }
+            },
+            {
+                id: 4,
+                title: "第四关：工厂与工人的利益平衡",
+                subtitle: "国家、生产单位和生产者个人的关系",
+                scene: "某国营机械厂，工人代表向你反映：'我们的劳动生产率提高了很多，但工资一直没涨，集体福利也不足。'厂长为难地说：'工厂利润都要上缴国家，如果给工人涨工资，会影响国家投资计划。'",
+                choices: [
+                    {
+                        text: "A. 全额上缴利润，暂不涨工资 - 国家利益高于一切",
+                        correct: false,
+                        feedback: "❌ 政策偏颇！工人看到劳动成果全部被拿走，积极性严重下降。生产率随之降低，工厂总产出反而减少，最终损害了国家、集体和个人的三方利益。",
+                        knowledge: "核心观点：必须兼顾国家利益、集体利益和个人利益。我们不能学苏联那样用行政命令办法一味地拿东西，而要更多地按照价值规律办事。"
+                    },
+                    {
+                        text: "B. 适当降低上缴比例，给工人涨工资并改善福利 - 兼顾三方利益",
+                        correct: true,
+                        feedback: "✅ 明智的平衡！工资和福利改善后，工人积极性大幅提高，生产率进一步提升。虽然上缴比例降低，但因为总产出增加，国家实际获得的利润反而更多，实现了三赢。",
+                        knowledge: "核心观点：工人劳动生产率提高了，他们的劳动条件和集体福利必须逐步有所改进。工资也需要适当调整，逐步缩小而不是扩大干部同工人之间的工资差距。",
+                        badge: "利益协调者"
+                    }
+                ],
+                quiz: {
+                    question: "苏联在处理国家与农民关系时的错误做法是什么？",
+                    options: [
+                        "给农民过高的产品价格",
+                        "用义务交售制等办法，拿走农民太多东西，给的代价很低",
+                        "完全让农民自由定价",
+                        "不收购农民产品"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "毛泽东批评苏联'用所谓义务交售制等办法，把农民生产的东西拿走太多，给的代价又极低'，严重损害了农民的积极性，这是我们必须避免的错误。"
+                }
+            },
+            {
+                id: 5,
+                title: "第五关：中央与地方的权力分配",
+                subtitle: "中央和地方的关系",
+                scene: "中央会议室里，广东省代表恳切地说：'中央部门指令太多太细，我们想发展特色农业却没有自主权。'中央干部担忧地表示：'如果给地方太多权力，会不会影响全国的统一计划和统一领导？'",
+                choices: [
+                    {
+                        text: "A. 中央统一管控所有事项 - 必须保证中央权威",
+                        correct: false,
+                        feedback: "❌ 管理失当！地方因为没有任何自主权，积极性极低。广东适合发展甘蔗、广西适合种植亚热带作物，这些特色产业全部停滞，造成巨大资源浪费。",
+                        knowledge: "核心观点：应该在巩固中央统一领导的前提下，扩大一点地方的权力，给地方更多的独立性，让地方办更多的事情。这对建设强大的社会主义国家更为有利。"
+                    },
+                    {
+                        text: "B. 中央管全国统一规划，地方自主发展特色产业 - 发挥两个积极性",
+                        correct: true,
+                        feedback: "✅ 完美平衡！在中央统一领导下，各地根据自身条件发展特色产业。广东甘蔗、广西热带作物、东北粮食基地，全国经济呈现多样化繁荣局面，两个积极性都得到充分发挥。",
+                        knowledge: "核心观点：我们的宪法规定，立法权集中在中央。但在不违背中央方针的条件下，地方可以按照情况，搞章程、条例、办法，宪法并不禁止这些。",
+                        badge: "权责规划师"
+                    }
+                ],
+                quiz: {
+                    question: "毛泽东提出处理中央和地方关系的原则是什么？",
+                    options: [
+                        "中央集中一切权力",
+                        "地方完全自治",
+                        "巩固中央统一领导，扩大地方权力，发挥两个积极性",
+                        "中央和地方平分权力"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "毛泽东指出：'我们要建设强大的社会主义国家，必须有中央的强有力的统一领导；同时，又必须充分发挥地方的积极性。'要避免苏联把地方卡得太死的错误。"
+                }
+            },
+            {
+                id: 6,
+                title: "第六关：汉族与少数民族的互助",
+                subtitle: "汉族和少数民族的关系",
+                scene: "新疆某牧区，汉族干部向你汇报：'牧区缺医少药，教育资源严重不足，少数民族群众生活很困难。'维吾尔族代表期待地说：'我们希望汉族同志能派技术人员指导畜牧业，但也担心文化差异会引发矛盾。'",
+                choices: [
+                    {
+                        text: "A. 只派技术人员，不关注文化交流 - 发展经济最重要",
+                        correct: false,
+                        feedback: "❌ 工作简单化！技术人员因为不了解当地风俗习惯，工作方式引起少数民族群众反感，帮扶效果很差。这种忽视民族文化的做法正是大汉族主义的表现。",
+                        knowledge: "核心观点：必须反对大汉族主义。地方民族主义也要反对，但一般说来，大汉族主义是主要危险。在一切工作中都要照顾少数民族的利益。"
+                    },
+                    {
+                        text: "B. 派技术+医疗+教育团队，并开展文化交流 - 全面帮扶，相互尊重",
+                        correct: true,
+                        feedback: "✅ 民族工作的典范！技术人员在尊重当地文化的基础上开展工作，医疗队解决了牧民就医难题，教师培养了本地人才。牧区畜牧业产量大增，汉族和少数民族关系更加融洽。",
+                        knowledge: "核心观点：我国少数民族人数虽少（占6%），但占地很广（50%-60%），资源丰富。在中国历史上，汉族和少数民族是兄弟关系，曾共同反抗外敌。",
+                        badge: "民族团结使者"
+                    }
+                ],
+                quiz: {
+                    question: "我国少数民族的特点是什么？",
+                    options: [
+                        "人数多，占地少",
+                        "人数少但占地广，地下资源丰富",
+                        "集中在东部地区",
+                        "与汉族没有历史联系"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "毛泽东指出：'我国少数民族人数虽然只占全国总人口的6%，但是占地很广，约占全国总面积的50%-60%。我们说地大物博，人口众多，实际上是汉族人口众多，少数民族地大物博。'"
+                }
+            },
+            {
+                id: 7,
+                title: "第七关：党与非党的协商",
+                subtitle: "党和非党的关系",
+                scene: "全国政协座谈会，民建代表诚恳地提出：'企业发展中遇到一些政策瓶颈，我们希望能更多参与政策讨论，贡献我们的经验。'部分党员干部私下担心：'让民主党派参与太多，会不会影响党的领导地位？'",
+                choices: [
+                    {
+                        text: "A. 限制民主党派意见，党单独决策 - 确保党的绝对领导",
+                        correct: false,
+                        feedback: "❌ 关门主义错误！民主党派的积极性受挫，很多来自企业一线的宝贵经验和建议无法被采纳。政策制定缺乏多元参考，出现脱离实际的情况。",
+                        knowledge: "核心观点：究竟是一个党好，还是几个党好？现在看来，恐怕是几个党好。这对党、对人民、对社会主义事业比较有利。共产党和民主党派要'长期共存、互相监督'。"
+                    },
+                    {
+                        text: "B. 建立座谈会制度，认真听取民主党派意见 - 长期共存、互相监督",
+                        correct: true,
+                        feedback: "✅ 协商民主的体现！定期座谈会让民主党派的合理建议得到重视和采纳，如降低中小企业税收、优化产业扶持政策等，这些来自实践的意见使政策更贴合实际，企业发展明显提速。",
+                        knowledge: "核心观点：所谓互相监督，当然不是单方面的，共产党可以监督民主党派,民主党派也可以监督共产党。为什么要让民主党派监督共产党呢？因为一个党同一个人一样，耳边很需要听到不同的声音。",
+                        badge: "协商民主推动者"
+                    }
+                ],
+                quiz: {
+                    question: "中国共产党与民主党派的关系方针是什么？",
+                    options: [
+                        "一党专政",
+                        "长期共存、互相监督",
+                        "轮流执政",
+                        "各自为政"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "毛泽东提出'长期共存、互相监督'的方针，认为几个党比一个党好，可以互相监督。共产党有一百多万党员，如果不受监督，很可能会犯错误。"
+                }
+            },
+            {
+                id: 8,
+                title: "第八关：反革命的改造之路",
+                subtitle: "革命和反革命的关系",
+                scene: "某监狱改造基地，管理人员汇报：'部分反革命分子表现出真诚的悔改态度，希望能重新做人，但担心出去后没有生活出路。'地方干部犹豫地说：'我们担心放出去后会再犯罪，是不是应该从严管控？'",
+                choices: [
+                    {
+                        text: "A. 全部长期关押，不给释放机会 - 安全第一",
+                        correct: false,
+                        feedback: "❌ 政策过严！对悔改者不给出路，导致改造积极性全无。监狱人满为患，消耗大量人力物力，社会资源严重浪费。这种做法违背了'给反革命分子生活出路'的原则。",
+                        knowledge: "核心观点：对反革命分子的处理办法是：杀、关、管、放。机关肃反实行'一个不杀，大部不捉'。总之，要少捉少杀,凡能劳动改造的，尽量使他们劳动,变成新人。"
+                    },
+                    {
+                        text: "B. 对悔改者劳动改造，释放后安排就业 - 给出路，促自新",
+                        correct: true,
+                        feedback: "✅ 改造政策的成功！通过劳动改造，反革命分子学会了技术,释放后安排到工厂工作。大多数人成为守法公民，再犯罪率很低。这体现了'化消极因素为积极因素'的智慧。",
+                        knowledge: "核心观点：镇压反革命要有分析。不应当杀的，比如学生、青年中的反革命，只要没有血债，就不杀。有些知识分子有血债,也不要杀。给他们一条生活出路,让他们变成新人。",
+                        badge: "改造引导者"
+                    }
+                ],
+                quiz: {
+                    question: "我国对反革命分子的处理办法包括哪些？机关肃反的方针是什么？",
+                    options: [
+                        "一律处死",
+                        "杀、关、管、放；机关肃反实行'一个不杀，大部不捉'",
+                        "全部释放",
+                        "驱逐出境"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "毛泽东提出对反革命分子的处理办法是'杀、关、管、放'，机关肃反实行'一个不杀，大部不捉'。凡是能够劳动改造的，尽量使他们劳动改造，变成新人。"
+                }
+            },
+            {
+                id: 9,
+                title: "第九关：党内错误的纠正",
+                subtitle: "是非关系",
+                scene: "某省委会议，一位年轻干部因为'制定农业政策时照搬苏联经验，导致当地农业减产'被批评。有人主张：'这是严重错误，应该撤职！'也有人建议：'他是工作方法问题，应该帮助改正。'",
+                choices: [
+                    {
+                        text: "A. 严厉处分，撤销职务 - 杀一儆百",
+                        correct: false,
+                        feedback: "❌ 过左倾向！严厉处分后，其他干部人人自危，不敢创新探索，政策制定变得保守僵化。这种'一棍子打死'的做法违背了'惩前毖后、治病救人'的方针。",
+                        knowledge: "核心观点：对于犯错误的同志，要实行'惩前毖后、治病救人'的方针。过去的错误一定要揭发，要批判，要进行斗争，但是要给他们一条出路,允许他们改正错误,允许他们继续革命。"
+                    },
+                    {
+                        text: "B. 帮助分析错误原因，指导调整政策 - 治病救人",
+                        correct: true,
+                        feedback: "✅ 正确的纠错方式！通过帮助这位干部分析'教条主义、脱离实际'的错误本质,指导他从当地实际出发调整政策。他深刻认识错误后,制定了符合本地情况的农业政策,很快恢复了农业生产。",
+                        knowledge: "核心观点：马克思主义一定要同中国实际相结合，要实事求是。有些苏联的东西在他们是正确的，在我们就不能照搬。每个国家都要创造自己的新东西。",
+                        badge: "纠错指导员"
+                    }
+                ],
+                quiz: {
+                    question: "对待犯错误的同志，正确的方针是什么？",
+                    options: [
+                        "严厉打击，决不姑息",
+                        "惩前毖后、治病救人",
+                        "不闻不问",
+                        "立即开除"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "毛泽东强调'惩前毖后、治病救人'的方针。过去的错误一定要揭发，不讲情面，但要给出路，帮助改正错误，允许继续革命。这是对待人民内部矛盾的正确态度。"
+                }
+            },
+            {
+                id: 10,
+                title: "第十关：向外国学习的取舍",
+                subtitle: "中国和外国的关系",
+                scene: "某科研机构会议室，研究员们展开激烈讨论。有人说：'我们应该全盘学习苏联的一切经验，包括管理制度。'另一派则反驳：'我们只学西方的科学技术就够了，制度经验一概不学！'",
+                choices: [
+                    {
+                        text: "A. 全盘学习苏联模式 - 苏联是老大哥",
+                        correct: false,
+                        feedback: "❌ 教条主义错误！照搬苏联的管理制度后，出现严重的水土不服。苏联的某些做法在中国行不通，科研效率反而下降。这种盲目照搬正是'教条主义'的表现。",
+                        knowledge: "核心观点：我们的方针是，一切民族、一切国家的长处都要学。但是，必须有分析有批判地学，不能盲目地学，不能一切照抄，机械搬用。他们的短处、缺点，当然不要学。"
+                    },
+                    {
+                        text: "B. 学先进技术和合理方法，拒绝腐败制度 - 有分析有批判地学",
+                        correct: true,
+                        feedback: "✅ 科学的学习态度！学习美国企业'用人少、效率高'的管理经验，学习苏联先进的科学技术，同时坚决拒绝资本主义的剥削制度和腐败作风。科研水平迅速提升，自主创新能力大大增强。",
+                        knowledge: "核心观点：外国资产阶级的一切腐败制度和思想作风，我们要坚决抵制和批判。但是，学习资本主义国家的先进科学技术和企业管理方法中合乎科学的方面，这些都不是什么坏东西。",
+                        badge: "学习创新者"
+                    }
+                ],
+                quiz: {
+                    question: "毛泽东提出向外国学习的原则是什么？",
+                    options: [
+                        "全盘照搬外国经验",
+                        "完全拒绝外国经验",
+                        "有分析有批判地学，学长处不学短处",
+                        "只学社会主义国家"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "毛泽东指出：'一切民族、一切国家的长处都要学，政治、经济、科学、技术、文学、艺术的一切真正好的东西都要学。但是必须有分析有批判地学，不能盲目地学，不能一切照抄，机械搬用。'"
+                }
+            }
+        ];
+
+        // 开始游戏
+        function startGame() {
+            document.getElementById('welcomeScreen').classList.remove('active');
+            document.getElementById('levelScreen').classList.add('active');
+            loadLevel(0);
+        }
+
+        // 加载关卡
+        function loadLevel(levelIndex) {
+            gameData.currentLevel = levelIndex;
+            const level = levels[levelIndex];
+            
+            // 更新进度条
+            updateProgressBar();
+            
+            // 显示关卡信息
+            document.getElementById('levelTitle').textContent = level.title;
+            document.getElementById('sceneDescription').textContent = level.scene;
+            
+            // 生成选择按钮
+            const choiceContainer = document.getElementById('choiceContainer');
+            choiceContainer.innerHTML = '<h3 style="margin-bottom: 15px; color: #333;">请做出你的决策：</h3>';
+            
+            level.choices.forEach((choice, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                btn.textContent = choice.text;
+                btn.onclick = () => handleChoice(index);
+                choiceContainer.appendChild(btn);
+            });
+            
+            // 重置反馈和测验
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('nextButton').style.display = 'none';
+        }
+
+        // 处理选择
+        function handleChoice(choiceIndex) {
+            const level = levels[gameData.currentLevel];
+            const choice = level.choices[choiceIndex];
+            
+            // 禁用所有选择按钮
+            document.querySelectorAll('.choice-btn').forEach(btn => {
+                btn.style.pointerEvents = 'none';
+            });
+            
+            // 高亮选中的选项
+            document.querySelectorAll('.choice-btn')[choiceIndex].classList.add('selected');
+            
+            // 显示反馈
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback show ' + (choice.correct ? 'correct' : 'wrong');
+            feedback.innerHTML = `
+                <h4>${choice.correct ? '✅ 决策正确！' : '❌ 决策需要调整'}</h4>
+                <p style="margin-top: 10px; line-height: 1.8;">${choice.feedback}</p>
+                <div class="knowledge-box">
+                    <h4>💡 理论要点</h4>
+                    <p style="line-height: 1.8;">${choice.knowledge}</p>
+                </div>
+            `;
+            
+            // 更新统计
+            if (choice.correct) {
+                gameData.correctChoices++;
+                gameData.score += 20;
+                if (choice.badge) {
+                    gameData.badges.push(choice.badge);
+                }
+            }
+            
+            // 延迟显示测验
+            setTimeout(() => {
+                showQuiz();
+            }, 2000);
+        }
+
+        // 显示知识问答
+        function showQuiz() {
+            const level = levels[gameData.currentLevel];
+            const quiz = level.quiz;
+            
+            const quizContainer = document.getElementById('quizContainer');
+            quizContainer.style.display = 'block';
+            quizContainer.innerHTML = `
+                <h3 style="margin-bottom: 20px; color: #d32f2f;">📝 知识检验</h3>
+                <div class="quiz-question">${quiz.question}</div>
+                ${quiz.options.map((option, index) => `
+                    <div class="quiz-option" onclick="handleQuizAnswer(${index})">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `).join('')}
+            `;
+            
+            gameData.totalQuizzes++;
+        }
+
+        // 处理问答答案
+        function handleQuizAnswer(answerIndex) {
+            const level   = levels[gameData.currentLevel];
+            const quiz    = level.quiz;
+            const options = document.querySelectorAll('.quiz-option');
+
+            // 1. 禁用所有选项
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+
+            // 2. 标出正确 / 用户选择
+            options[quiz.correctAnswer].classList.add('correct');
+            if (answerIndex !== quiz.correctAnswer) {
+                options[answerIndex].classList.add('wrong');
+            }
+
+            // 3. 统计
+            if (answerIndex === quiz.correctAnswer) {
+                gameData.quizCorrect++;
+                gameData.score += 10;
+            }
+            gameData.totalQuizzes++;
+
+            // 4. 根据对错拼接反馈 HTML
+            const container = document.getElementById('quizContainer');
+            let html = '';
+
+            if (answerIndex !== quiz.correctAnswer) {
+                // ❌ 答错场景
+                html += `
+                    <div class="knowledge-box" style="margin-top:20px;border-left-color:#f44336;">
+                        <h4>❌ 回答错误</h4>
+                        <p>正确答案是：<strong>${String.fromCharCode(65 + quiz.correctAnswer)}. ${quiz.options[quiz.correctAnswer]}</strong></p>
+                    </div>
+                `;
+            }
+            if (answerIndex == quiz.correctAnswer) {
+
+                html += `
+                    <div class="knowledge-box" style="margin-top:20px;border-left-color:#f44336;">
+                        <h4>✅ 回答正确！！</h4>
+                    </div>
+                `;
+            }
+            // 公共解析
+            html += `
+                <div class="knowledge-box" style="margin-top:15px;">
+                    <h4>📚 答案解析</h4>
+                    <p style="line-height:1.8;">${quiz.explanation}</p>
+                </div>
+            `;
+
+            container.innerHTML += html;
+
+            // 5. 显示下一关按钮
+            document.getElementById('nextButton').style.display = 'inline-block';
+        }
+
+        // 下一关
+        function nextLevel() {
+            if (gameData.currentLevel < levels.length - 1) {
+                loadLevel(gameData.currentLevel + 1);
+                window.scrollTo(0, 0);
+            } else {
+                showEnding();
+            }
+        }
+
+        // 更新进度条
+        function updateProgressBar() {
+            const progress = ((gameData.currentLevel + 1) / levels.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // 显示结局
+        function showEnding() {
+            document.getElementById('levelScreen').classList.remove('active');
+            document.getElementById('endingScreen').classList.add('active');
+            
+            const quizRate = (gameData.quizCorrect / gameData.totalQuizzes * 100).toFixed(0);
+            let endingType = '';
+            let endingTitle = '';
+            let endingDesc = '';
+            
+            if (gameData.correctChoices === 10 && quizRate >= 90) {
+                endingType = 'perfect';
+                endingTitle = '🏆 完美结局：建设先锋';
+                endingDesc = '恭喜你！你参与制定的"十大关系"政策方案被中央采纳，新中国在社会主义建设中少走弯路。工业、农业、国防等领域协调发展，民族团结、党派和谐，经济建设蒸蒸日上。你深刻理解了《论十大关系》的精髓，被评为"优秀政策研究员"！';
+            } else if (gameData.correctChoices >= 7 && quizRate >= 60) {
+                endingType = 'good';
+                endingTitle = '⭐ 普通结局：合格研究员';
+                endingDesc = '你在部分关卡中因决策偏差导致小范围问题，但通过学习和调整最终解决了问题。新中国建设虽有波折但总体顺利。你对《论十大关系》有了较好的理解，继续深入学习，你会做得更好！';
+            } else {
+                endingType = 'explore';
+                endingTitle = '📖 探索结局：继续学习';
+                endingDesc = '你在多个关卡中遇到了困难，这说明对《论十大关系》的理解还需要加强。建议重新认真学习原文内容，理解每一对关系背后的辩证思维。实践是检验真理的唯一标准，再闯一次，你一定会有新的收获！';
+            }
+            
+            document.getElementById('endingTitle').textContent = endingTitle;
+            document.getElementById('endingDescription').textContent = endingDesc;
+            
+            // 显示统计数据
+            document.getElementById('finalStats').innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-value">${gameData.correctChoices}/10</div>
+                    <div class="stat-label">正确决策</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${quizRate}%</div>
+                    <div class="stat-label">答题正确率</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${gameData.score}</div>
+                    <div class="stat-label">总分</div>
+                </div>
+                <a href="downloads/ten_relationships.pdf" download="论十大关系.pdf" class="download-btn">
+                <span class="btn-icon">↓</span>
+                <span class="btn-text">下载学习资料</span>
+                </a>
+            `;
+            
+            // 显示获得的徽章
+            if (gameData.badges.length > 0) {
+                document.getElementById('badgesEarned').innerHTML = `
+                    <h3 style="margin: 30px 0 20px; color: #d32f2f; text-align: center;">🎖️ 获得徽章</h3>
+                    <div style="text-align: center;">
+                        ${gameData.badges.map(badge => `<span class="badge">${badge}</span>`).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        // 继续游戏
+        function continueGame() {
+            nextLevel();
+        }
+
+        // 重新开始
+        function restartGame() {
+            gameData.currentLevel = 0;
+            gameData.score = 0;
+            gameData.correctChoices = 0;
+            gameData.quizCorrect = 0;
+            gameData.totalQuizzes = 0;
+            gameData.badges = [];
+            
+            document.getElementById('endingScreen').classList.remove('active');
+            document.getElementById('levelScreen').classList.add('active');
+            loadLevel(0);
+            window.scrollTo(0, 0);
+        }
+
+        // 初始化进度条
+        updateProgressBar();
+    </script>
+
+
+</body></html>
